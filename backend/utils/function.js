@@ -10,13 +10,13 @@ export function getAllBook(req, res) {
 
 export function getBookById(req, res) {
   const id = Number(req.params.id);
-  const listBuku = buku.find(b => b.id === id);
+  const idBuku = buku.find((item) => item.id === id);
 
-  if (!listBuku) {
+  if (!idBuku) {
     return res.status(404).json({ msg: "Buku tidak ditemukan" });
   }
 
-  res.json(listBuku);
+  res.json(idBuku);
 }
 
 
