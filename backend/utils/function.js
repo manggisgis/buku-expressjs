@@ -19,7 +19,6 @@ export function getBookById(req, res) {
   res.json(idBuku);
 }
 
-
 export function createBook(req, res) {
   const { nama } = req.body;
   const namaPeminjam = "";
@@ -83,9 +82,11 @@ export function deleteBook(req, res) {
 
 export function checkRole(allowedRoles) {
   return (req, res, next) => {
-    const { username } = req.body;
+    const { username } = req.body || {};
 
-    const user = usersData.find(u => u.username === username);
+    let user = username
+      ? usersData.find((u) => u.username === username)
+      : usersData.find((u) => u.username === "guest");
 
     if (!user) {
       return res.status(404).json({ msg: "username tidak ditemukan" });
